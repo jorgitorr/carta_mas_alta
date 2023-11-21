@@ -30,7 +30,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.jorgearceruiz97.carta_mas_alta.R
 
 
 class MainActivity : ComponentActivity() {
@@ -49,8 +48,9 @@ class MainActivity : ComponentActivity() {
 
     //con el lambda lo que le introduzco por parametros es la variable que voy a modificar
     //@Preview(showBackground = true)
+    @SuppressLint("ResourceType")
     @Composable
-    fun BotonesYCartas(reiniciar:(Baraja)->Unit, dameCarta:(Carta) -> Unit, carta: Carta){
+    fun BotonesYCartas(reiniciar:(Baraja)->Unit, dameCarta: (Carta) -> Unit, carta: Carta){
 
         Box(
             modifier = Modifier
@@ -59,8 +59,8 @@ class MainActivity : ComponentActivity() {
         ){
 
             Image(//tengo que pasarle el id de cada carta, el id es un entero
-                painter = painterResource(id = recuperaIdCarta(carta).toInt()),
-                contentDescription = stringResource(id = R.drawable.facedown.toInt()),
+                painter = painterResource(id = recuperaIdCarta(carta)),
+                contentDescription = stringResource(id = R.drawable.facedown),
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -102,8 +102,9 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun visualizacion(){
 
-        var idCarta by rememberSaveable {
-            mutableStateOf("")
+        var carta by rememberSaveable {
+            mutableStateOf(Baraja.dameCarta())//como hago para que en vez de devolver una carta devuelva un nulo
+
         }
 
 
@@ -112,10 +113,9 @@ class MainActivity : ComponentActivity() {
             Baraja.crearBaraja()
             Baraja.barajar() },
             dameCarta = {
-                idCarta =
-                    recuperaIdCarta(carta = Baraja.dameCarta()).toString()//le pasa la carta y recupera su id
+                carta = Baraja.dameCarta()
             },
-            idCarta
+            carta
         )
     }
 
