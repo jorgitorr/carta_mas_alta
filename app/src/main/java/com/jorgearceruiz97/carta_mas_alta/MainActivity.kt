@@ -41,13 +41,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color(0,100,0)
                 ) {
+                    Baraja.crearBaraja()
                     visualizacion()
                 }
         }
     }
 
     //con el lambda lo que le introduzco por parametros es la variable que voy a modificar
-    //@Preview(showBackground = true)
     @SuppressLint("ResourceType")
     @Composable
     fun BotonesYCartas(reiniciar:(Baraja)->Unit, dameCarta: (Carta) -> Unit, carta: Carta){
@@ -101,12 +101,9 @@ class MainActivity : ComponentActivity() {
     @Preview(showBackground = true)
     @Composable
     fun visualizacion(){
-
         var carta by rememberSaveable {
             mutableStateOf(Baraja.dameCarta())//como hago para que en vez de devolver una carta devuelva un nulo
-
         }
-
 
         BotonesYCartas(
             reiniciar = {
