@@ -48,7 +48,7 @@ fun BotonesYCartas(){
     ){
 
         Image(
-            painter = painterResource(R.drawable.facedown),//lo que no funciona es el metodo recuperaIdCarta()
+            painter = painterResource(recuperaIdCarta(carta)),
             //painter = painterResource(id = recuperaIdCarta(carta)
             contentDescription = "",
             contentScale = ContentScale.Fit,
@@ -84,7 +84,12 @@ fun BotonesYCartas(){
 @Composable
 fun recuperaIdCarta(carta: Carta): Int {
     val context = LocalContext.current
-    val nombre = "${carta.palo}${carta.idDrawable}"
+    var nombre = ""
+    if(carta.idDrawable == R.drawable.facedown)
+        nombre = "facedown"
+    else
+        nombre = "${carta.palo.palo}${carta.idDrawable}"
+
     return context.resources.getIdentifier(nombre, "drawable", context.packageName)
 }
 
