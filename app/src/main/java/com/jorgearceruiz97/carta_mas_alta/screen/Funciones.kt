@@ -34,19 +34,23 @@ import com.jorgearceruiz97.carta_mas_alta.clases.Carta
 
 
 //con el lambda lo que le introduzco por parametros es la variable que voy a modificar
+@Preview(showBackground = true)
 @SuppressLint("ResourceType")
 @Composable
-fun BotonesYCartas(reiniciar:(Baraja)->Unit, dameCarta: (Carta) -> Unit, carta: Carta){
-
+fun BotonesYCartas(){
+//reiniciar:(Baraja)->Unit, dameCarta: (Carta) -> Unit, carta: Carta
+    var carta = Baraja.dameCarta()
+    Baraja.crearBaraja()
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0, 100, 0))
     ){
 
-        Image(//tengo que pasarle el id de cada carta, el id es un entero
-            painter = painterResource(id = recuperaIdCarta(carta)),
-            contentDescription = stringResource(id = R.drawable.facedown),
+        Image(
+            painter = painterResource(R.drawable.facedown),//lo que no funciona es el metodo recuperaIdCarta()
+            //painter = painterResource(id = recuperaIdCarta(carta)
+            contentDescription = "",
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .fillMaxWidth()
@@ -60,10 +64,11 @@ fun BotonesYCartas(reiniciar:(Baraja)->Unit, dameCarta: (Carta) -> Unit, carta: 
             horizontalAlignment = Alignment.CenterHorizontally){
 
             Row {
-                Button(onClick = { dameCarta } , modifier = Modifier.padding(horizontal = 5.dp)) {
+                Button(onClick = { /*dameCarta*/carta = Baraja.dameCarta() } , modifier = Modifier.padding(horizontal = 5.dp)) {
                     Text(text = "Dame Carta")
                 }
-                Button(onClick = { reiniciar } , modifier = Modifier.padding(horizontal = 5.dp)) {
+                Button(onClick = { /*reiniciar*/Baraja.crearBaraja()
+                                 Baraja.barajar()} , modifier = Modifier.padding(horizontal = 5.dp)) {
                     Text(text = "Reiniciar")
                 }
             }
@@ -84,11 +89,11 @@ fun recuperaIdCarta(carta: Carta): Int {
 }
 
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun visualizacion(){
     var carta by rememberSaveable {
-        mutableStateOf(Baraja.dameCarta())//como hago para que en vez de devolver una carta devuelva un nulo
+        mutableStateOf(Baraja.dameCarta())
     }
 
     BotonesYCartas(
@@ -100,4 +105,4 @@ fun visualizacion(){
         },
         carta
     )
-}
+}*/

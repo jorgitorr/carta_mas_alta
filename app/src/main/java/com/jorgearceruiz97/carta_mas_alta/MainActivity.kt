@@ -33,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import com.jorgearceruiz97.carta_mas_alta.clases.Baraja
 import com.jorgearceruiz97.carta_mas_alta.clases.Carta
 import com.jorgearceruiz97.carta_mas_alta.ui.theme.Carta_mas_altaTheme
-import visualizacion
 
 
 class MainActivity : ComponentActivity() {
@@ -45,8 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Color(0,100,0)
                 ) {
-                    Baraja.crearBaraja()
-                    visualizacion()
+
                 }
             }
 
