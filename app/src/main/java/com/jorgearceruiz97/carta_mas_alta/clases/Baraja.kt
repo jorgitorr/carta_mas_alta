@@ -1,5 +1,7 @@
 package com.jorgearceruiz97.carta_mas_alta.clases
 
+import com.jorgearceruiz97.carta_mas_alta.R
+
 
 class Baraja {
     companion object {
@@ -11,17 +13,17 @@ class Baraja {
          */
 
         fun crearBaraja(){
-            var palos = Palos.values()
             var naipes = Naipes.values()
 
-            var idDrawable = 0
-            for(palo in palos){
-                idDrawable++
-                for(naipe in naipes){
-                    cartas.add(Carta(naipe,palo, naipe.valorMax, naipe.valorMin,idDrawable))
-                    idDrawable++
-                }
+
+
+            for (i in 1 until 13){
+                cartas.add(Carta(naipes[i],Palos.TREBOL, naipes[i].valorMax, naipes[i].valorMin,i))
+                cartas.add(Carta(naipes[i],Palos.CORAZONES, naipes[i].valorMax, naipes[i].valorMin,i))
+                cartas.add(Carta(naipes[i],Palos.DIAMANTE, naipes[i].valorMax, naipes[i].valorMin,i))
+                cartas.add(Carta(naipes[i],Palos.PICAS, naipes[i].valorMax, naipes[i].valorMin,i))
             }
+
         }
 
 
@@ -34,9 +36,14 @@ class Baraja {
          * @return devuelve la carta con la ultima carta de la baraja
          */
         fun dameCarta(): Carta {
-            var carta = cartas[cartas.size-1]
-            cartas.remove(carta)
-            return carta
+            if(cartas.size!=0){
+                var carta = cartas[cartas.size-1]
+                cartas.remove(carta)
+                return carta
+            }else{
+                return Carta(Naipes.CERO,Palos.CERO,0,0, R.drawable.facedown)
+            }
+
         }
 
     }
