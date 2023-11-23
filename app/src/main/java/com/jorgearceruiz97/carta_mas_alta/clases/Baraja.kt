@@ -1,7 +1,4 @@
-package com.jorgearceruiz97.carta_mas_alta
-
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
+package com.jorgearceruiz97.carta_mas_alta.clases
 
 
 class Baraja {
@@ -36,7 +33,7 @@ class Baraja {
          * guarda la ultima carta de la baraja y la elimina de la lista
          * @return devuelve la carta con la ultima carta de la baraja
          */
-        fun dameCarta():Carta{
+        fun dameCarta(): Carta {
             var carta = cartas[cartas.size-1]
             cartas.remove(carta)
             return carta
