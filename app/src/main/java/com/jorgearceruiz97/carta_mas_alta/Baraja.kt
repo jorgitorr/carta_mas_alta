@@ -17,24 +17,14 @@ class Baraja {
             var palos = Palos.values()
             var naipes = Naipes.values()
 
-
+            var idDrawable = 0
             for(palo in palos){
+                idDrawable++
                 for(naipe in naipes){
-                    cartas.add(Carta(naipe,palo, naipe.valorMax, naipe.valorMin, /*devuelveId(
-                        palo = palo,
-                        naipe = naipe
-                    ))*/0))
+                    cartas.add(Carta(naipe,palo, naipe.valorMax, naipe.valorMin,idDrawable))
+                    idDrawable++
                 }
             }
-        }
-
-        @Composable
-        fun devuelveId(palo: Palos, naipe: Naipes): Int {
-            val context = LocalContext.current
-
-            var id = naipe.valorMin.toString() + palo.name //obtiene el id
-
-            return context.resources.getIdentifier(id, "drawable", context.packageName)
         }
 
 
