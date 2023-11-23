@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -39,7 +40,9 @@ import com.jorgearceruiz97.carta_mas_alta.clases.Carta
 @Composable
 fun BotonesYCartas(){
 //reiniciar:(Baraja)->Unit, dameCarta: (Carta) -> Unit, carta: Carta
-    var carta = Baraja.dameCarta()
+    var carta by remember {
+        mutableStateOf(Baraja.dameCarta())
+    }
     Baraja.crearBaraja()
     Box(
         modifier = Modifier
